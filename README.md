@@ -1,6 +1,4 @@
 # Sulcus Control Hub
-
-Today I want to create a website for the start up that I am developing, called Sulcus.
 Build the Sulcus Investor Website
 
 Create a premium, technically sophisticated investor-facing website for Sulcus, an infrastructure startup building the control and supervision layer for production AI-agent systems.
