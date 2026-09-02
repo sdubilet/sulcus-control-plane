@@ -26,7 +26,7 @@ export const Route = createFileRoute("/contact")({
 const channels = [
   { label: "Investors", value: "investors@sulcus.dev" },
   { label: "Engineering & partnerships", value: "team@sulcus.dev" },
-  { label: "General", value: "hello@sulcus.dev" },
+  { label: "General", value: "milan@sulcus.dev" },
 ];
 
 function ContactPage() {
