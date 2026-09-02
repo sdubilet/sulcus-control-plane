@@ -16,10 +16,13 @@ As autonomy increases, a new infrastructure problem emerges:
 
 Traditional software infrastructure assumes that execution is relatively deterministic:
 
+```text
 Application → Function → Result
+```
 
 Agentic systems are fundamentally different:
 
+```text
 Agent
   ↓
 Decision
@@ -35,6 +38,7 @@ Parallel Execution
 New Decision
   ↓
 External Action
+```
 
 When multiple autonomous processes operate simultaneously, traditional application-level observability is no longer enough.
 
@@ -60,6 +64,7 @@ Frameworks such as LangGraph help developers construct agent workflows.
 
 Sulcus operates at a different level:
 
+```text
 ┌──────────────────────────────────────┐
 │           AI APPLICATION             │
 ├──────────────────────────────────────┤
@@ -74,10 +79,11 @@ Sulcus operates at a different level:
 ├──────────────────────────────────────┤
 │          COMPUTE / CLOUD             │
 └──────────────────────────────────────┘
-
+```
 
 The long-term vision is for Sulcus to provide infrastructure that can sit underneath different agent architectures and frameworks.
 
+---
 
 ## Core Concepts
 
@@ -109,13 +115,15 @@ Enable systems and operators to pause, inspect, redirect, or terminate execution
 
 Reconstruct execution histories to understand how an autonomous system reached a particular state.
 
+---
+
 ## The Parallel Execution Problem
 
 One of the fundamental challenges in multi-agent systems is concurrency.
 
 Consider:
 
-
+```text
                  ┌── Agent A ──→ Tool 1
                  │
 Task ────────────┼── Agent B ──→ Tool 2
@@ -123,7 +131,7 @@ Task ────────────┼── Agent B ──→ Tool 2
                  ├── Agent C ──→ Database
                  │
                  └── Agent D ──→ Agent A
-
+```
 
 These processes may execute concurrently and interact with shared state.
 
@@ -138,6 +146,7 @@ This introduces problems such as:
 
 Sulcus treats autonomous execution as a **systems problem**, not simply an application-level AI problem.
 
+---
 
 ## Current Development
 
@@ -151,12 +160,13 @@ The goal is not to replace agent frameworks.
 
 The goal is to build the infrastructure around them.
 
+---
 
 ## Architecture
 
 At a high level:
 
-
+```text
                  ┌──────────────────┐
                  │   Application    │
                  └────────┬─────────┘
@@ -181,10 +191,11 @@ At a high level:
       ┌───▼───┐       ┌───▼───┐        ┌──▼────┐
       │ Tools │       │ Data  │        │  APIs │
       └───────┘       └───────┘        └───────┘
-
+```
 
 The architecture will evolve as the runtime and adapter layers mature.
 
+---
 
 ## Why Sulcus?
 
@@ -204,6 +215,7 @@ As agents become increasingly autonomous, another layer becomes necessary:
 
 Sulcus is being built to occupy that layer.
 
+---
 
 ## Vision
 
