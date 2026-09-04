@@ -1,7 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { Wordmark } from "./Wordmark";
 import markAsset from "@/assets/sulcus-mark.png.asset.json";
-...
+
+const links = [
+  { label: "Product", href: "#product" },
+  { label: "Architecture", href: "#architecture" },
+  { label: "Vision", href: "#vision" },
+  { label: "Company", href: "#team" },
+];
+
 export function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-border">
