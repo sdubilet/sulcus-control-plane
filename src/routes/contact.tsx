@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/primitives";
+import markAsset from "@/assets/sulcus-mark.png.asset.json";
 
 const TITLE = "Contact — Sulcus";
 const DESC =
