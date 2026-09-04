@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/primitives";
+import markAsset from "@/assets/sulcus-mark.png.asset.json";
 
 const TITLE = "Contact — Sulcus";
 const DESC =
@@ -35,7 +36,13 @@ function ContactPage() {
       <Nav />
       <main className="mx-auto max-w-6xl px-6 pb-28 pt-36">
         <Reveal>
-          <span className="label-mono text-primary">Contact</span>
+          <img
+            src={markAsset.url}
+            alt=""
+            aria-hidden="true"
+            className="mb-8 h-14 w-14 select-none object-contain"
+          />
+          <span className="label-mono block text-primary">Contact</span>
           <h1 className="mt-6 max-w-3xl text-balance text-4xl font-semibold leading-[1.05] md:text-6xl">
             Talk to the team.
           </h1>

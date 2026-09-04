@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Wordmark } from "./Wordmark";
+import markAsset from "@/assets/sulcus-mark.png.asset.json";
 
 const links = [
   { label: "Product", href: "#product" },
@@ -10,8 +11,14 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-14 md:flex-row md:items-start md:justify-between">
+    <footer className="relative overflow-hidden border-t border-border">
+      <img
+        src={markAsset.url}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-24 -right-16 hidden w-[380px] select-none opacity-[0.04] md:block"
+      />
+      <div className="relative mx-auto flex max-w-6xl flex-col gap-10 px-6 py-14 md:flex-row md:items-start md:justify-between">
         <div>
           <Wordmark />
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">
