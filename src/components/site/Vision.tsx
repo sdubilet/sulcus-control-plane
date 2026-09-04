@@ -1,4 +1,5 @@
 import { Section, Reveal } from "./primitives";
+import markAsset from "@/assets/sulcus-mark.png.asset.json";
 
 const traits = ["observable.", "controllable.", "coordinated.", "governable."];
 
@@ -7,6 +8,12 @@ export function Vision() {
     <Section id="vision" index="15" label="Vision" className="overflow-hidden">
       <div className="relative">
         <div className="grid-bg pointer-events-none absolute inset-0 -m-20 [mask-image:radial-gradient(60%_60%_at_30%_50%,black,transparent)]" />
+        <img
+          src={markAsset.url}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-24 top-1/2 hidden w-[440px] -translate-y-1/2 select-none opacity-[0.06] lg:block"
+        />
         <div className="relative">
           <Reveal>
             <h2 className="max-w-4xl text-balance text-3xl font-semibold leading-[1.05] md:text-6xl">

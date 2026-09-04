@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Reveal } from "./primitives";
 import { ControlPlaneViz } from "./ControlPlaneViz";
+import markAsset from "@/assets/sulcus-mark.png.asset.json";
 
 export function Hero() {
   return (
@@ -12,6 +13,12 @@ export function Hero() {
           background:
             "radial-gradient(60% 100% at 50% 0%, color-mix(in oklab, var(--signal) 12%, transparent), transparent 70%)",
         }}
+      />
+      <img
+        src={markAsset.url}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-32 top-24 hidden w-[560px] select-none opacity-[0.05] lg:block"
       />
       <div className="relative mx-auto w-full max-w-6xl px-6">
         <Reveal>

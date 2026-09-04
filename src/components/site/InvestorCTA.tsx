@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Reveal } from "./primitives";
+import markAsset from "@/assets/sulcus-mark.png.asset.json";
 
 export function InvestorCTA() {
   return (
@@ -12,6 +13,14 @@ export function InvestorCTA() {
         }}
       />
       <div className="relative mx-auto max-w-4xl px-6 py-28 text-center md:py-40">
+        <Reveal>
+          <img
+            src={markAsset.url}
+            alt=""
+            aria-hidden="true"
+            className="mx-auto mb-10 h-16 w-16 select-none object-contain text-glow md:h-20 md:w-20"
+          />
+        </Reveal>
         <Reveal>
           <h2 className="text-balance text-3xl font-semibold leading-[1.05] md:text-6xl">
             The next generation of software will act.
