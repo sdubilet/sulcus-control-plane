@@ -24,9 +24,9 @@ export const Route = createFileRoute("/contact")({
 });
 
 const channels = [
-  { label: "Investors", value: "investors@sulcus.dev" },
-  { label: "Engineering & partnerships", value: "team@sulcus.dev" },
-  { label: "General", value: "milan@sulcus.dev" },
+  { label: "Sofiia", value: "sofiia@sulcus.dev" },
+  { label: "Elariz", value: "elariz@sulcus.dev" },
+  { label: "Milan", value: "milan@sulcus.dev" },
 ];
 
 function ContactPage() {
@@ -62,9 +62,6 @@ function ContactPage() {
         </Reveal>
 
         <Reveal delay={160}>
-          <p className="mt-10 font-mono text-xs text-muted-foreground">
-            Addresses are placeholders until mailboxes are confirmed.
-          </p>
           <Link to="/" className="mt-10 inline-block text-sm text-muted-foreground hover:text-foreground">
             ← Back to overview
           </Link>
