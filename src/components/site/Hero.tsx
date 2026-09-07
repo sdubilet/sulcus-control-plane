@@ -73,13 +73,7 @@ export function Hero() {
         </Reveal>
 
         <Reveal delay={200}>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-3 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-[0_0_24px_rgba(255,122,26,0.35)]"
-            >
-              Talk to the team
-            </Link>
+          <div className="mt-10 flex w-full max-w-3xl flex-wrap items-center gap-4">
             <a
               href="#developers"
               className="inline-flex items-center justify-center rounded-full border border-border px-7 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/60 hover:text-primary"
@@ -102,7 +96,14 @@ export function Hero() {
             >
               GitHub
             </a>
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-3 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-[0_0_24px_rgba(255,122,26,0.35)] sm:ml-auto"
+            >
+              Talk to the team
+            </Link>
           </div>
+
         </Reveal>
       </div>
 
