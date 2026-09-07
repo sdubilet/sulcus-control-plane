@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Nav } from "@/components/site/Nav";
+import { Navigation } from "@/components/site/Navigation";
 import { Hero } from "@/components/site/Hero";
 import { Problem } from "@/components/site/Problem";
 import { Approach } from "@/components/site/Approach";
@@ -19,22 +19,26 @@ import { Team } from "@/components/site/Team";
 import { InvestorCTA } from "@/components/site/InvestorCTA";
 import { Footer } from "@/components/site/Footer";
 
-const TITLE = "Sulcus — The control layer for autonomous AI";
-const DESC =
-  "Sulcus provides the infrastructure to supervise, coordinate, observe, and control AI-agent systems in production.";
-
 export const Route = createFileRoute("/")({
+  component: HomePage,
   head: () => ({
     meta: [
-      { title: TITLE },
-      { name: "description", content: DESC },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESC },
+      { title: "Sulcus — The control layer for autonomous AI" },
+      {
+        name: "description",
+        content:
+          "Sulcus provides the infrastructure to supervise, coordinate, observe, and control AI-agent systems in production.",
+      },
+      { property: "og:title", content: "Sulcus — The control layer for autonomous AI" },
+      {
+        property: "og:description",
+        content:
+          "Sulcus provides the infrastructure to supervise, coordinate, observe, and control AI-agent systems in production.",
+      },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://sulcus.dev/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -43,18 +47,20 @@ export const Route = createFileRoute("/")({
           "@type": "Organization",
           name: "Sulcus",
           url: "https://sulcus.dev",
-          description: DESC,
+          sameAs: [],
+          contactPoint: [
+            { "@type": "ContactPoint", email: "sofiia@sulcus.dev", contactType: "investor relations" },
+          ],
         }),
       },
     ],
   }),
-  component: Index,
 });
 
-function Index() {
+function HomePage() {
   return (
-    <div className="min-h-screen bg-background">
-      <Nav />
+    <div className="min-h-screen bg-background text-foreground">
+      <Navigation />
       <main>
         <Hero />
         <Problem />
