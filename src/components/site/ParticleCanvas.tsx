@@ -3,11 +3,42 @@ import { useEffect, useRef, useState } from "react";
 const COUNT = 2200;
 const THRESHOLD = 0.6;
 
+type Particle = {
+  x: number;
+  y: number;
+  z: number;
+  vy: number;
+  vx: number;
+  size: number;
+  state: "falling" | "hover" | "denied" | "passed";
+  hoverPhase: number;
+  life: number;
+  scatterAngle: number;
+  scatterSpeed: number;
+};
+
+function createParticle(w: number, h: number): Particle {
+  const z = Math.random();
+  return {
+    x: Math.random() * w,
+    y: Math.random() * h * 0.8,
+    z,
+    vy: 0.4 + Math.random() * 0.8 + z * 0.7,
+    vx: (Math.random() - 0.5) * 0.25,
+    size: 0.6 + z * 1.6,
+    state: "falling",
+    hoverPhase: Math.random() * Math.PI * 2,
+    life: 1,
+    scatterAngle: Math.random() * Math.PI,
+    scatterSpeed: 0.8 + Math.random() * 1.2,
+  };
+}
+
 export function ParticleCanvas({ scrollProgress }: { scrollProgress: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [prefersReduced, setPrefersReduced] = useState(false);
   const particlesRef = useRef<Particle[]>([]);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | undefined>(undefined);
   const dprRef = useRef(1);
 
   useEffect(() => {
@@ -52,14 +83,12 @@ export function ParticleCanvas({ scrollProgress }: { scrollProgress: number }) {
       ctx.setTransform(dprRef.current, 0, 0, dprRef.current, 0, 0);
       ctx.clearRect(0, 0, w, h);
 
-      // soft depth-of-field: distant particles drawn first
       const sorted = particlesRef.current.slice().sort((a, b) => b.z - a.z);
       for (const p of sorted) {
         updateParticle(p, w, h, lineY, dt);
         drawParticle(ctx, p, w, h, lineY, scrollProgress);
       }
 
-      // threshold line
       ctx.save();
       ctx.globalAlpha = 0.55 - scrollProgress * 0.45;
       ctx.strokeStyle = "rgba(255,255,255,0.35)";
@@ -103,92 +132,47 @@ export function ParticleCanvas({ scrollProgress }: { scrollProgress: number }) {
   );
 }
 
-type Particle = {
-  x: number;
-  y: number;
-  z: number; // 0..1 depth
-  vy: number;
-  vx: number;
-  size: number;
-  state: "falling" | "hover" | "denied" | "passed";
-  hoverPhase: number;
-  life: number;
-  scatterAngle: number;
-  scatterSpeed: number;
-};
-
-function createParticle(w: number, h: number): Particle {
-  const z = Math.pow(Math.random(), 2.5); // bias toward far
-  const size = 0.5 + (1 - z) * 1.7;
-  const vy = 0.6 + (1 - z) * 1.4 + Math.random() * 0.4;
-  return {
-    x: Math.random() * w,
-    y: Math.random() * h * 0.85 - h * 0.1,
-    z,
-    vy,
-    vx: (Math.random() - 0.5) * 0.25,
-    size,
-    state: "falling",
-    hoverPhase: Math.random() * Math.PI * 2,
-    life: 1,
-    scatterAngle: Math.random() * Math.PI,
-    scatterSpeed: 0,
-  };
-}
-
 function updateParticle(p: Particle, w: number, h: number, lineY: number, dt: number) {
   if (p.state === "falling") {
     p.y += p.vy * dt;
     p.x += p.vx * dt;
-
-    // converge slightly toward center near threshold
-    if (p.y > lineY - 80 && p.y < lineY) {
-      const center = w * 0.5;
-      p.vx += (center - p.x) * 0.00008 * dt;
-    }
-
     if (p.y >= lineY) {
-      const roll = Math.random();
-      if (roll < 0.78) {
+      const r = Math.random();
+      if (r < 0.78) {
         p.state = "passed";
-      } else if (roll < 0.94) {
+      } else if (r < 0.94) {
         p.state = "hover";
-        p.y = lineY - 4 - Math.random() * 18;
         p.hoverPhase = Math.random() * Math.PI * 2;
       } else {
         p.state = "denied";
-        p.scatterAngle = (Math.random() - 0.5) * Math.PI;
-        p.scatterSpeed = 1.2 + Math.random() * 1.6;
+        p.scatterAngle = Math.PI / 2 + (Math.random() - 0.5) * Math.PI;
+        p.scatterSpeed = 0.8 + Math.random() * 1.2;
+        p.life = 1;
       }
-    }
-  } else if (p.state === "hover") {
-    p.hoverPhase += 0.05 * dt;
-    p.y += Math.sin(p.hoverPhase) * 0.35 * dt;
-    p.x += Math.cos(p.hoverPhase * 0.7) * 0.25 * dt;
-    p.life -= 0.003 * dt;
-    if (p.life <= 0) {
-      Object.assign(p, createParticle(w, h));
-      p.y = -10;
-    }
-  } else if (p.state === "denied") {
-    p.x += Math.cos(p.scatterAngle) * p.scatterSpeed * dt;
-    p.y += Math.sin(p.scatterAngle) * p.scatterSpeed * dt + 0.4 * dt;
-    p.life -= 0.025 * dt;
-    if (p.life <= 0 || p.y > h + 20 || p.x < -20 || p.x > w + 20) {
-      Object.assign(p, createParticle(w, h));
-      p.y = -10;
     }
   } else if (p.state === "passed") {
     p.y += p.vy * dt;
     p.x += p.vx * dt;
-    if (p.y > h + 20) {
+    if (p.y > h + 4) {
       Object.assign(p, createParticle(w, h));
-      p.y = -10;
+      p.y = -4;
+    }
+  } else if (p.state === "hover") {
+    p.hoverPhase += 0.04 * dt;
+    p.y = lineY - 6 - Math.sin(p.hoverPhase) * 3;
+    p.x += Math.cos(p.hoverPhase) * 0.15 * dt;
+  } else if (p.state === "denied") {
+    p.x += Math.cos(p.scatterAngle) * p.scatterSpeed * dt;
+    p.y += Math.sin(p.scatterAngle) * p.scatterSpeed * dt;
+    p.life -= 0.04 * dt;
+    if (p.life <= 0) {
+      Object.assign(p, createParticle(w, h));
+      p.y = -4;
     }
   }
 
-  if (p.x < -20) p.x = w + 20;
-  if (p.x > w + 20) p.x = -20;
+  if (p.x < -4) p.x = w + 4;
+  if (p.x > w + 4) p.x = -4;
 }
 
 function drawParticle(
@@ -199,28 +183,28 @@ function drawParticle(
   lineY: number,
   scrollProgress: number,
 ) {
-  const depth = 1 - p.z;
-  const baseAlpha = 0.2 + depth * 0.75;
-  const blur = p.z * 2.2;
+  const depth = p.z;
+  const blur = depth < 0.35 ? 1.2 : depth < 0.7 ? 0.5 : 0;
+  const alphaBase = 0.25 + depth * 0.55;
 
-  let alpha = baseAlpha;
-  if (p.state === "hover") alpha *= 0.5 + 0.5 * Math.sin(p.hoverPhase * 2);
+  let alpha = alphaBase;
+  if (p.state === "hover") alpha = 0.55 + Math.sin(p.hoverPhase) * 0.2;
   if (p.state === "denied") alpha *= p.life;
 
-  // recede / part as user scrolls through threshold
-  const part = Math.max(0, scrollProgress - 0.2) * 1.2;
-  const yOffset = (p.y - lineY) * part * 0.35;
-  const drawY = p.y + yOffset;
+  const yPart = (p.y - lineY) / (h - lineY);
+  const partFactor = Math.max(0, Math.min(1, yPart * 1.8)) * scrollProgress;
+  alpha *= 1 - partFactor * 0.85;
+
+  const size = p.size * (1 - partFactor * 0.4);
 
   ctx.save();
-  ctx.globalAlpha = Math.max(0, alpha * (1 - scrollProgress * 0.7));
-  ctx.fillStyle = "#ffffff";
-  if (blur > 0.4) {
-    ctx.shadowBlur = blur;
-    ctx.shadowColor = "rgba(255,255,255,0.45)";
+  ctx.globalAlpha = alpha;
+  if (blur > 0) {
+    ctx.filter = `blur(${blur}px)`;
   }
+  ctx.fillStyle = "#F2F0EB";
   ctx.beginPath();
-  ctx.arc(p.x, drawY, p.size * (1 + depth * 0.5), 0, Math.PI * 2);
+  ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
   ctx.fill();
   ctx.restore();
 }
