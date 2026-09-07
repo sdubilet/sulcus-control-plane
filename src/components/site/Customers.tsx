@@ -11,7 +11,7 @@ const segments = [
 
 export function Customers() {
   return (
-    <Section id="customers" index="13" label="Target customers / initial market">
+    <Section id="customers" index="12" label="Target customers / initial market">
       <Reveal>
         <Headline>Built for teams pushing agents into production.</Headline>
       </Reveal>

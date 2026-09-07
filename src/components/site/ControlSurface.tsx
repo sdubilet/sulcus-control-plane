@@ -20,7 +20,7 @@ type Agent = {
   budget: number;
 };
 
-type Verdict = "allowed" | "validated" | "paused" | "denied" | "approved" | "info";
+type Verdict = "allowed" | "permission" | "denied";
 
 type ActivityEvent = {
   id: number;
@@ -160,13 +160,13 @@ const initial: State = {
 const SCRIPT: Array<{ actor: string; text: string; verdict: Verdict }> = [
   { actor: "CLAUDE CODE", text: "Modified checkout.tsx", verdict: "allowed" },
   { actor: "CODEX", text: "Executed test suite", verdict: "allowed" },
-  { actor: "KIMI", text: "Requested external API", verdict: "validated" },
+  { actor: "KIMI", text: "Requested external API", verdict: "allowed" },
   { actor: "RESEARCH", text: "Indexed 12 sources", verdict: "allowed" },
   { actor: "CODEX", text: "Attempted production write", verdict: "denied" },
-  { actor: "SULCUS", text: "Policy boundary enforced", verdict: "info" },
-  { actor: "CLAUDE CODE", text: "Attempted production deployment", verdict: "paused" },
-  { actor: "SULCUS", text: "Approval required", verdict: "info" },
-  { actor: "KIMI", text: "Token budget threshold 82%", verdict: "info" },
+  { actor: "SULCUS", text: "Policy boundary enforced", verdict: "denied" },
+  { actor: "CLAUDE CODE", text: "Attempted production deployment", verdict: "permission" },
+  { actor: "SULCUS", text: "Approval required", verdict: "permission" },
+  { actor: "KIMI", text: "Token budget threshold 82%", verdict: "allowed" },
   { actor: "CLAUDE CODE", text: "Committed 3 files", verdict: "allowed" },
 ];
 
@@ -247,12 +247,16 @@ const elapsedStr = (s: number) => `${Math.floor(s / 60)}m ${pad(s % 60)}s`;
 
 const verdictClass: Record<Verdict, string> = {
   allowed: "text-ok",
-  validated: "text-primary",
-  paused: "text-warn",
+  permission: "text-warn",
   denied: "text-danger",
-  approved: "text-ok",
-  info: "text-primary",
 };
+
+const verdictLabel: Record<Verdict, string> = {
+  allowed: "allowed",
+  permission: "permission requested",
+  denied: "denied",
+};
+
 
 const statusLabel: Record<AgentStatus, string> = {
   running: "RUNNING",
@@ -371,7 +375,7 @@ export function ControlSurface() {
 
   const runSecurity = useCallback(() => {
     dispatch({ type: "security", phase: "requested" });
-    dispatch({ type: "log", actor: "CODEX", text: "Requested production database write", verdict: "validated" });
+    dispatch({ type: "log", actor: "CODEX", text: "Requested production database write", verdict: "allowed" });
     setTimeout(() => dispatch({ type: "security", phase: "validating" }), 900);
     setTimeout(() => {
       dispatch({ type: "security", phase: "denied" });
@@ -439,7 +443,7 @@ export function ControlSurface() {
                       <span className="w-16 shrink-0 text-muted-foreground">{clockStr(e.t)}</span>
                       <span className="w-32 shrink-0 text-foreground/80">{e.actor}</span>
                       <span className="flex-1 text-muted-foreground">{e.text}</span>
-                      <span className={cn("label-mono", verdictClass[e.verdict])}>→ {e.verdict}</span>
+                      <span className={cn("label-mono", verdictClass[e.verdict])}>→ {verdictLabel[e.verdict]}</span>
                     </li>
                   ))}
                 </ul>
@@ -503,7 +507,7 @@ export function ControlSurface() {
                     tone="warn"
                     onClick={() => {
                       dispatch({ type: "agent", id: agent.id, status: "paused" });
-                      dispatch({ type: "log", actor: "OPERATOR", text: `Paused ${agent.name}`, verdict: "paused" });
+                      dispatch({ type: "log", actor: "OPERATOR", text: `Paused ${agent.name}`, verdict: "permission" });
                     }}
                   >
                     PAUSE
@@ -512,7 +516,7 @@ export function ControlSurface() {
                     tone="ok"
                     onClick={() => {
                       dispatch({ type: "agent", id: agent.id, status: "running" });
-                      dispatch({ type: "log", actor: "OPERATOR", text: `Resumed ${agent.name}`, verdict: "approved" });
+                      dispatch({ type: "log", actor: "OPERATOR", text: `Resumed ${agent.name}`, verdict: "allowed" });
                     }}
                   >
                     RESUME
@@ -533,7 +537,7 @@ export function ControlSurface() {
                         type: "log",
                         actor: "SULCUS",
                         text: `${agent.name} scope restricted to read-only`,
-                        verdict: "info",
+                        verdict: "permission",
                       });
                     }}
                   >
@@ -596,7 +600,7 @@ export function ControlSurface() {
                     tone="ok"
                     onClick={() => {
                       dispatch({ type: "grant", id: "codex" });
-                      dispatch({ type: "log", actor: "OPERATOR", text: "Granted CODEX +10% budget", verdict: "approved" });
+                      dispatch({ type: "log", actor: "OPERATOR", text: "Granted CODEX +10% budget", verdict: "allowed" });
                     }}
                   >
                     ALLOW +10%
@@ -605,7 +609,7 @@ export function ControlSurface() {
                     tone="warn"
                     onClick={() => {
                       dispatch({ type: "agent", id: "codex", status: "paused" });
-                      dispatch({ type: "log", actor: "SULCUS", text: "CODEX paused at budget limit", verdict: "paused" });
+                      dispatch({ type: "log", actor: "SULCUS", text: "CODEX paused at budget limit", verdict: "permission" });
                     }}
                   >
                     PAUSE AGENT
@@ -711,8 +715,8 @@ export function ControlSurface() {
                         tone="ok"
                         onClick={() => {
                           dispatch({ type: "resolveApproval", id: a.id, approve: true });
-                          dispatch({ type: "log", actor: "USER", text: `Approved · ${a.request}`, verdict: "approved" });
-                          dispatch({ type: "log", actor: "SULCUS", text: "Execution resumed under approval", verdict: "info" });
+                          dispatch({ type: "log", actor: "USER", text: `Approved · ${a.request}`, verdict: "allowed" });
+                          dispatch({ type: "log", actor: "SULCUS", text: "Execution resumed under approval", verdict: "permission" });
                         }}
                       >
                         APPROVE

@@ -26,7 +26,7 @@ const glyph: Record<Mark, string> = { yes: "●", partial: "◐", no: "—" };
 
 export function Compare() {
   return (
-    <Section id="positioning" index="10" label="Positioning">
+    <Section id="positioning" index="09" label="Positioning">
       <Reveal>
         <Headline>Layers, not competitors.</Headline>
       </Reveal>

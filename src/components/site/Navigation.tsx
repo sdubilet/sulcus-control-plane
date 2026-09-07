@@ -3,10 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { Wordmark } from "./Wordmark";
 
 const links = [
-  { label: "Architecture", href: "#architecture" },
+  { label: "Architecture", href: "#coordination" },
   { label: "Product", href: "#product" },
-  { label: "Demo", href: "#demo" },
-  { label: "Vision", href: "#vision" },
   { label: "Contact", href: "/contact" },
 ];
 

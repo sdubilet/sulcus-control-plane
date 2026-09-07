@@ -3,7 +3,7 @@ import { OrchestrationTheatre } from "./OrchestrationTheatre";
 
 export function Coordination() {
   return (
-    <Section id="coordination" index="05" label="When agents stop acting alone">
+    <Section id="coordination" index="04" label="Architecture">
       <Reveal>
         <Headline>Autonomy requires coordination.</Headline>
       </Reveal>

@@ -11,7 +11,7 @@ const stages = [
 
 export function WhyNow() {
   return (
-    <Section id="why-now" index="08" label="Why now">
+    <Section id="why-now" index="07" label="Why now">
       <Reveal>
         <Headline>The autonomy curve is accelerating.</Headline>
       </Reveal>

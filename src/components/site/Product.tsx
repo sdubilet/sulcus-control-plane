@@ -12,7 +12,7 @@ const caps = [
 
 export function Product() {
   return (
-    <Section id="product" index="06" label="Product">
+    <Section id="product" index="05" label="Product">
       <Reveal>
         <Headline>Infrastructure for autonomous execution.</Headline>
       </Reveal>
