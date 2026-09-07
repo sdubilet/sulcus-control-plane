@@ -153,7 +153,7 @@ export function OrchestrationTheatre() {
   const wrap = useRef<HTMLDivElement | null>(null);
   const [inView, setInView] = useState(true);
 
-  useEffect(() => setI(0), [scenarioId]);
+  useEffect(() => setI(0), []);
 
   useEffect(() => {
     const el = wrap.current;
