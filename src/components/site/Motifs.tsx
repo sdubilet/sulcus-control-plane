@@ -43,7 +43,7 @@ export function MetaballMark({
       [43, 36, 12],
     ],
   ];
-  const circles = sets[variant % sets.length];
+  const circles = sets[variant % sets.length] ?? sets[0]!;
   return (
     <svg viewBox="0 0 64 64" className={className} fill="none" aria-hidden="true">
       {circles.map(([cx, cy, r], i) => (
