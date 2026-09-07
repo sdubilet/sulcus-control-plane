@@ -43,7 +43,7 @@ export function CodeDemo() {
   const typed = useTypewriter(CODE, visible);
 
   return (
-    <Section id="developers" index="07" label="Try the code">
+    <Section id="developers" index="06" label="Try the code">
       <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
         <div>
           <Reveal>

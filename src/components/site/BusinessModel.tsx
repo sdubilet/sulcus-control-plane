@@ -18,7 +18,7 @@ const loop = [
 
 export function BusinessModel() {
   return (
-    <Section id="business" index="12" label="Business model">
+    <Section id="business" index="11" label="Business model">
       <Reveal>
         <Headline>Infrastructure economics.</Headline>
       </Reveal>

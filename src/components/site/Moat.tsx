@@ -15,7 +15,7 @@ const apps = ["AI products", "Internal workflows", "Enterprise systems"];
 
 export function Moat() {
   return (
-    <Section id="defensibility" index="11" label="Defensibility">
+    <Section id="defensibility" index="10" label="Defensibility">
       <Reveal>
         <Headline>The moat is the execution layer.</Headline>
       </Reveal>

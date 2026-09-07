@@ -13,7 +13,7 @@ const stack = [
 
 export function Market() {
   return (
-    <Section id="market" index="09" label="Market thesis">
+    <Section id="market" index="08" label="Market thesis">
       <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
         <div>
           <Reveal>
