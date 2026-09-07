@@ -47,7 +47,7 @@ export function Hero() {
 
       <div className="pointer-events-none absolute left-6 top-24 z-10 hidden md:block">
         <p className="label-mono text-foreground/55">
-          python agent runtime · scan/01 · point cloud
+          python agent runtime · 1.0 Release Candidate
         </p>
       </div>
 
@@ -61,7 +61,7 @@ export function Hero() {
         </Reveal>
         <Reveal delay={80}>
           <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-[1.1] tracking-tight text-foreground md:text-6xl lg:text-7xl">
-            Runtime control for AI agents.
+            Runtime control for autonomous agents.
           </h1>
         </Reveal>
         <Reveal delay={140}>
@@ -79,10 +79,26 @@ export function Hero() {
               Talk to the team
             </Link>
             <a
-              href="#architecture"
+              href="#developers"
               className="inline-flex items-center justify-center rounded-full border border-border px-7 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/60 hover:text-primary"
             >
-              Explore the Architecture
+              Try the Code
+            </a>
+            <a
+              href="https://github.com/ElarizT/Sulcus#readme"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center rounded-full border border-border px-7 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/60 hover:text-primary"
+            >
+              Read the docs
+            </a>
+            <a
+              href="https://github.com/ElarizT/Sulcus"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center rounded-full border border-border px-7 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/60 hover:text-primary"
+            >
+              GitHub
             </a>
           </div>
         </Reveal>
