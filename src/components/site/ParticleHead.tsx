@@ -108,7 +108,7 @@ function HeadCloud({
       mat.size = 0.019 + p * 0.012;
     }
     // camera dives forward through the head
-    camera.position.z = 6.4 - p * 6.5;
+    camera.position.z = 5.3 - p * 5.5;
     camera.position.y = 2.1 - p * 2.0;
     camera.position.x = -0.6;
     camera.lookAt(-0.6, p * 0.15, 0);
@@ -116,7 +116,7 @@ function HeadCloud({
   });
 
   return (
-    <points ref={points} geometry={geometry} position={[1.75, 0.15, 0]}>
+    <points ref={points} geometry={geometry} position={[1.5, 0.1, 0]}>
       <pointsMaterial
         map={texture}
         size={0.019}
@@ -162,7 +162,7 @@ export function ParticleHead({ progressRef }: { progressRef: React.MutableRefObj
       <Canvas
         dpr={[1, 1.75]}
         gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
-        camera={{ position: [-0.6, 2.1, 6.4], fov: 45 }}
+        camera={{ position: [-0.6, 2.1, 5.3], fov: 45 }}
       >
         <HeadCloud count={count} progressRef={progressRef} />
       </Canvas>
