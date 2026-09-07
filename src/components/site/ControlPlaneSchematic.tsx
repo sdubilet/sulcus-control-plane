@@ -213,7 +213,17 @@ export function ControlPlaneSchematic() {
             );
           })}
 
+          {/* ── Layer label ── */}
+          <rect x={36} y={314} width={410} height={38} fill="var(--background)" />
+          <text x={40} y={330} fontSize="9.5" letterSpacing="2.4" fontFamily="var(--font-mono)" fill="var(--foreground)">
+            AGENTS &amp; FRAMEWORKS
+          </text>
+          <text x={40} y={346} fontSize="9" fontFamily="var(--font-mono)" fill="var(--muted-foreground)">
+            Different models • Different frameworks • Different capabilities
+          </text>
+
           {/* ── Agents ── */}
+
           {AGENTS.map((a) => {
             const on = hoverAgent === a.id || hoverSulcus;
             return (
@@ -268,7 +278,9 @@ export function ControlPlaneSchematic() {
           ))}
 
           {/* ── Execution environment ── */}
+          <rect x={36} y={EXEC_Y - 30} width={210} height={20} fill="var(--background)" />
           <text x={40} y={EXEC_Y - 18} fontSize="9.5" letterSpacing="2.4" fontFamily="var(--font-mono)" fill="var(--foreground)">
+
             EXECUTION ENVIRONMENT
           </text>
           <rect x={40} y={EXEC_Y} width={W - 80} height={64} rx={6} fill="var(--surface)" stroke="var(--border)" />
