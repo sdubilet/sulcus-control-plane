@@ -443,7 +443,7 @@ export function ControlSurface() {
                       <span className="w-16 shrink-0 text-muted-foreground">{clockStr(e.t)}</span>
                       <span className="w-32 shrink-0 text-foreground/80">{e.actor}</span>
                       <span className="flex-1 text-muted-foreground">{e.text}</span>
-                      <span className={cn("label-mono", verdictClass[e.verdict])}>→ {e.verdict}</span>
+                      <span className={cn("label-mono", verdictClass[e.verdict])}>→ {verdictLabel[e.verdict]}</span>
                     </li>
                   ))}
                 </ul>
