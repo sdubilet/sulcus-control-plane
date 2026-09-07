@@ -1,35 +1,33 @@
 import { Section, Headline, Lede, Reveal } from "./primitives";
 
-const people = [
-  { role: "Founder", note: "Profile to be added." },
-  { role: "Co-founder", note: "Profile to be added." },
-  { role: "Technical Founder / Engineering", note: "Profile to be added." },
-  { role: "Advisors", note: "Advisor profiles to be added." },
+const team = [
+  { name: "Sofiia", role: "Co-founder / CEO", note: "Strategy, product, and go-to-market." },
+  { name: "Elariz", role: "Co-founder / CTO", note: "Architecture, runtime, and engineering." },
+  { name: "Milan", role: "Co-founder / Engineering", note: "Systems and platform development." },
 ];
 
 export function Team() {
   return (
     <Section id="team" index="16" label="Team">
       <Reveal>
-        <Headline>Engineers building infrastructure.</Headline>
+        <Headline>Builders, not bystanders.</Headline>
       </Reveal>
       <Reveal delay={80}>
         <Lede className="mt-6">
-          Profiles, biographies, and links are being finalized.
+          Sulcus is being built by a small team with deep conviction about the infrastructure
+          required for autonomous systems.
         </Lede>
       </Reveal>
 
-      <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-        {people.map((p, i) => (
-          <Reveal key={p.role} delay={i * 70} className="bg-background">
-            <article className="h-full bg-surface/50 p-6">
-              <div className="flex h-24 w-24 items-center justify-center rounded-sm border border-dashed border-border-strong bg-surface-2/50">
-                <span className="label-mono">photo</span>
-              </div>
-              <h3 className="mt-6 text-base font-semibold">{p.role}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{p.note}</p>
-              <p className="mt-6 font-mono text-[11px] text-muted-foreground/70">linkedin · pending</p>
-            </article>
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {team.map((m, i) => (
+          <Reveal key={m.name} delay={i * 80}>
+            <div className="panel tech-frame p-7">
+              <span className="label-mono text-primary">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-6 text-xl font-semibold">{m.name}</h3>
+              <p className="mt-2 text-sm text-primary">{m.role}</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{m.note}</p>
+            </div>
           </Reveal>
         ))}
       </div>
