@@ -41,7 +41,8 @@ export function Market() {
         </div>
 
         <Reveal delay={120}>
-          <div className="space-y-2">
+          <div className="relative space-y-2 p-6 panel tech-frame">
+            <span className="pointer-events-none absolute -right-2 -top-2 font-mono text-[10px] text-muted-foreground">stack_09</span>
             {stack.map((s) => (
               <div
                 key={s.name}

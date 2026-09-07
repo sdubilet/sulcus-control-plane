@@ -1,7 +1,11 @@
 # Roadmap
 
-- [ ] Lock the visual palette, typography pairing, and section composition.
-- [ ] Produce and select a rendered redesign direction anchored to the current site.
-- [ ] Implement the particle threshold hero and hero-to-first-section transition.
-- [ ] Apply wireframe/HUD motifs, oversized section numerals, and machine textures without changing copy or structure.
-- [ ] Verify reduced-motion behavior, contrast, desktop/mobile layout, interactions, and build health.
+- [x] Confirm scope: visual/motion redesign only, copy and structure frozen.
+- [x] Capture current page reference.
+- [ ] Implement pure-black particle threshold hero with allowed/approval/denied states.
+- [ ] Add native-scroll hero-to-section-01 parting transition.
+- [ ] Apply technical wireframe/HUD motifs to diagrams.
+- [ ] Oversized background section numerals behind each header.
+- [ ] Scanline/dot-matrix texture on code/trace panels.
+- [ ] Update design tokens to Signal Orange palette, Sora/Manrope type, pure black canvas.
+- [ ] Verify reduced motion, static fallback, WCAG AA contrast, build, and preview.

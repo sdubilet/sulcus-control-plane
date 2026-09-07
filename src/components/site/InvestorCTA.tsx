@@ -1,49 +1,37 @@
 import { Link } from "@tanstack/react-router";
-import { Reveal } from "./primitives";
-import markAsset from "@/assets/sulcus-mark.png.asset.json";
+import { Section, Headline, Lede, Reveal } from "./primitives";
+import { WordmarkMark } from "./Wordmark";
 
 export function InvestorCTA() {
   return (
-    <section id="contact-cta" className="relative overflow-hidden border-t border-border">
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(60% 100% at 50% 100%, color-mix(in oklab, var(--signal) 12%, transparent), transparent 70%)",
-        }}
-      />
-      <div className="relative mx-auto max-w-4xl px-6 py-28 text-center md:py-40">
+    <section className="relative overflow-hidden bg-black py-28 md:py-36">
+      <div className="pointer-events-none absolute inset-0 opacity-[0.05]" aria-hidden="true">
+        <WordmarkMark className="absolute -right-16 -top-16 h-80 w-80 text-primary md:h-[28rem] md:w-[28rem]" />
+      </div>
+
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6">
         <Reveal>
-          <img
-            src={markAsset.url}
-            alt=""
-            aria-hidden="true"
-            className="mx-auto mb-10 h-16 w-16 select-none object-contain text-glow md:h-20 md:w-20"
-          />
-        </Reveal>
-        <Reveal>
-          <h2 className="text-balance text-3xl font-semibold leading-[1.05] md:text-6xl">
-            The next generation of software will act.
-          </h2>
+          <Headline className="text-foreground">Investor materials available on request.</Headline>
         </Reveal>
         <Reveal delay={80}>
-          <p className="mx-auto mt-6 max-w-xl text-pretty text-lg text-muted-foreground">
-            We&apos;re building the infrastructure that keeps it under control.
-          </p>
+          <Lede className="mt-6 max-w-2xl text-foreground/70">
+            We are currently raising our seed round. If you are interested in the future of
+            autonomous systems infrastructure, we would love to talk.
+          </Lede>
         </Reveal>
         <Reveal delay={140}>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link
               to="/contact"
-              className="rounded-sm bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-3 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-[0_0_24px_rgba(255,122,26,0.35)]"
             >
-              Talk to Sulcus
+              Talk to the team
             </Link>
             <a
-              href="#architecture"
-              className="rounded-sm border border-border-strong px-5 py-3 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
+              href="mailto:sofiia@sulcus.dev"
+              className="inline-flex items-center justify-center rounded-full border border-border px-7 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/60 hover:text-primary"
             >
-              View Technical Architecture
+              Email sofiia@sulcus.dev
             </a>
           </div>
         </Reveal>

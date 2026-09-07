@@ -61,14 +61,14 @@ export function FlagshipDemo() {
 
       <Reveal delay={120}>
         <div ref={ref} className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border lg:grid-cols-[1.1fr_1fr]">
-          <div className="bg-surface/60">
+          <div className="bg-surface/60 scanlines">
             <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
               <span className="label-mono">event stream</span>
               <span className={cn("label-mono", paused ? "text-warn" : "text-primary")}>
                 {paused ? "paused" : "running"}
               </span>
             </div>
-            <ul className="h-[320px] space-y-2 overflow-hidden p-4 font-mono text-xs">
+            <ul className="relative z-10 h-[320px] space-y-2 overflow-hidden p-4 font-mono text-xs">
               {shown.map((s, idx) => (
                 <li key={`${s.actor}-${idx}`} className="flex gap-3">
                   <span className="w-28 shrink-0 text-foreground/70">{s.actor}</span>
@@ -89,8 +89,13 @@ export function FlagshipDemo() {
               <span className="label-mono">execution graph</span>
               <span className="label-mono">tsk_8f21</span>
             </div>
-            <div className="p-4">
+            <div className="relative p-4">
               <svg viewBox="0 0 420 170" className="h-[220px] w-full" role="img" aria-label="Live execution graph">
+                {/* radar rings */}
+                <g opacity="0.1">
+                  <circle cx="210" cy="85" r="50" fill="none" stroke="var(--border-strong)" strokeWidth="1" />
+                  <circle cx="210" cy="85" r="90" fill="none" stroke="var(--border-strong)" strokeWidth="1" />
+                </g>
                 <path d="M96 54 H196" stroke="var(--border-strong)" strokeWidth="1" className="anim-flow" />
                 <path d="M96 54 L196 124" stroke="var(--border-strong)" strokeWidth="1" className="anim-flow" />
                 <path d="M236 34 L336 79" stroke="var(--border-strong)" strokeWidth="1" className="anim-flow" />
@@ -123,6 +128,7 @@ export function FlagshipDemo() {
                   );
                 })}
               </svg>
+              <span className="pointer-events-none absolute right-5 top-5 font-mono text-[10px] text-muted-foreground">graph_14</span>
 
               <div
                 className={cn(

@@ -2,141 +2,122 @@ import { useState } from "react";
 import { Section, Headline, Lede, Reveal } from "./primitives";
 import { cn } from "@/lib/utils";
 
-type Node = {
-  id: string;
-  title: string;
-  body: string;
-  x: number;
-  y: number;
-  w: number;
-  tier: "runtime" | "control" | "surface";
-};
+const nodes = [
+  { id: "agents", label: "Agents", x: 90, y: 70 },
+  { id: "tools", label: "Tools", x: 90, y: 180 },
+  { id: "sulcus", label: "Sulcus", x: 240, y: 125, primary: true },
+  { id: "observe", label: "Observe", x: 390, y: 55 },
+  { id: "govern", label: "Govern", x: 390, y: 125 },
+  { id: "intervene", label: "Intervene", x: 390, y: 195 },
+];
 
-const nodes: Node[] = [
-  { id: "runtime", title: "Agent Runtime", body: "Where autonomous agents execute.", x: 40, y: 30, w: 230, tier: "runtime" },
-  { id: "graph", title: "Execution Graph", body: "Represents dependencies, state transitions, and agent workflows.", x: 300, y: 30, w: 230, tier: "runtime" },
-  { id: "state", title: "State & Coordination", body: "Handles shared state and coordination between concurrent agents.", x: 560, y: 30, w: 240, tier: "runtime" },
-  { id: "control", title: "Control Plane", body: "Sulcus supervises execution and enforces system-level policies.", x: 40, y: 170, w: 760, tier: "control" },
-  { id: "events", title: "Event Layer", body: "Captures execution events, decisions, state changes, tool calls, and failures.", x: 40, y: 300, w: 180, tier: "surface" },
-  { id: "policy", title: "Policy Engine", body: "Defines what agents can and cannot do.", x: 240, y: 300, w: 180, tier: "surface" },
-  { id: "obs", title: "Observability", body: "Provides a complete execution history and system-level visibility.", x: 440, y: 300, w: 180, tier: "surface" },
-  { id: "intervene", title: "Intervention", body: "Allows operators or automated policies to pause, redirect, isolate, or terminate execution.", x: 640, y: 300, w: 160, tier: "surface" },
+const connections: [string, string][] = [
+  ["agents", "sulcus"],
+  ["tools", "sulcus"],
+  ["sulcus", "observe"],
+  ["sulcus", "govern"],
+  ["sulcus", "intervene"],
 ];
 
 export function Architecture() {
-  const [active, setActive] = useState<string>("control");
-  const current = nodes.find((n) => n.id === active)!;
+  const [active, setActive] = useState<string | null>("sulcus");
 
   return (
     <Section id="architecture" index="04" label="Architecture">
       <Reveal>
-        <Headline>Built for systems that act.</Headline>
+        <Headline>One control surface. Many runtimes.</Headline>
       </Reveal>
       <Reveal delay={80}>
         <Lede className="mt-6">
-          A supervision plane between autonomous agents and everything they touch. Select a
-          component to inspect its role.
+          Sulcus is designed to wrap existing agent runtimes and frameworks, applying supervision
+          without requiring teams to rebuild their systems.
         </Lede>
       </Reveal>
 
-      <Reveal delay={120}>
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-          <div className="panel overflow-hidden">
-            <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-              <span className="label-mono">system topology</span>
-              <span className="label-mono text-primary">event flow active</span>
-            </div>
-            <div className="overflow-x-auto p-4">
-              <svg viewBox="0 0 840 400" className="h-[340px] w-full min-w-[640px]" role="img" aria-label="Sulcus architecture diagram">
-                {/* connectors */}
-                {["155,100 155,170", "415,100 415,170", "680,100 680,170"].map((pts, i) => (
-                  <polyline
-                    key={pts}
-                    points={pts}
-                    fill="none"
-                    stroke="var(--signal)"
-                    strokeOpacity="0.6"
-                    strokeWidth="1"
-                    className="anim-flow"
-                    style={{ animationDelay: `${i * 0.6}s` }}
-                  />
-                ))}
-                {[130, 330, 530, 720].map((x, i) => (
-                  <polyline
-                    key={x}
-                    points={`${x},240 ${x},300`}
-                    fill="none"
+      <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1fr]">
+        <Reveal>
+          <div className="panel tech-frame relative overflow-hidden p-6">
+            <span className="pointer-events-none absolute right-5 top-5 font-mono text-[10px] text-muted-foreground">topo_04</span>
+            <svg viewBox="0 0 500 270" className="h-[280px] w-full" role="img" aria-label="Sulcus architecture topology">
+              <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--border-strong)" />
+                </marker>
+              </defs>
+              <g opacity="0.1">
+                <circle cx="240" cy="125" r="60" fill="none" stroke="var(--border-strong)" strokeWidth="1" />
+                <circle cx="240" cy="125" r="100" fill="none" stroke="var(--border-strong)" strokeWidth="1" />
+              </g>
+              {connections.map(([a, b]) => {
+                const na = nodes.find((n) => n.id === a)!;
+                const nb = nodes.find((n) => n.id === b)!;
+                return (
+                  <line
+                    key={`${a}-${b}`}
+                    x1={na.x}
+                    y1={na.y}
+                    x2={nb.x}
+                    y2={nb.y}
                     stroke="var(--border-strong)"
                     strokeWidth="1"
+                    markerEnd="url(#arrow)"
                     className="anim-flow"
-                    style={{ animationDelay: `${i * 0.5}s` }}
                   />
-                ))}
-
-                {nodes.map((n) => {
-                  const isActive = n.id === active;
-                  const h = n.tier === "control" ? 70 : 70;
-                  return (
-                    <g
-                      key={n.id}
-                      onMouseEnter={() => setActive(n.id)}
-                      onClick={() => setActive(n.id)}
-                      className="cursor-pointer"
+                );
+              })}
+              {nodes.map((n) => {
+                const isActive = active === n.id;
+                return (
+                  <g
+                    key={n.id}
+                    className="cursor-pointer"
+                    onMouseEnter={() => setActive(n.id)}
+                    onMouseLeave={() => setActive("sulcus")}
+                  >
+                    <rect
+                      x={n.x - 42}
+                      y={n.y - 18}
+                      width={84}
+                      height={36}
+                      rx={6}
+                      fill={n.primary ? "var(--primary)" : "var(--surface-2)"}
+                      stroke={isActive ? "var(--signal)" : n.primary ? "var(--primary)" : "var(--border-strong)"}
+                      strokeWidth={isActive ? 2 : 1}
+                    />
+                    <text
+                      x={n.x}
+                      y={n.y + 4}
+                      textAnchor="middle"
+                      fontSize="11"
+                      fontFamily="var(--font-mono)"
+                      fill={n.primary ? "var(--primary-foreground)" : "var(--foreground)"}
                     >
-                      <rect
-                        x={n.x}
-                        y={n.y}
-                        width={n.w}
-                        height={h}
-                        rx={3}
-                        fill={n.tier === "control" ? "color-mix(in oklab, var(--signal) 9%, var(--surface))" : "var(--surface-2)"}
-                        stroke={isActive || n.tier === "control" ? "var(--signal)" : "var(--border-strong)"}
-                        strokeOpacity={isActive ? 1 : n.tier === "control" ? 0.6 : 0.8}
-                      />
-                      <text
-                        x={n.x + 14}
-                        y={n.y + 28}
-                        fontSize="12"
-                        fontFamily="var(--font-mono)"
-                        fill={n.tier === "control" || isActive ? "var(--signal)" : "var(--foreground)"}
-                      >
-                        {n.title}
-                      </text>
-                      <text x={n.x + 14} y={n.y + 48} fontSize="10" fontFamily="var(--font-mono)" fill="var(--muted-foreground)">
-                        {n.tier === "control" ? "supervision · policy · intervention" : n.tier}
-                      </text>
-                    </g>
-                  );
-                })}
-              </svg>
-            </div>
+                      {n.label}
+                    </text>
+                  </g>
+                );
+              })}
+            </svg>
           </div>
+        </Reveal>
 
-          <aside className="panel flex flex-col p-6">
-            <span className="label-mono text-primary">{current.tier}</span>
-            <h3 className="mt-4 text-2xl font-semibold">{current.title}</h3>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{current.body}</p>
-            <div className="mt-8 space-y-px overflow-hidden rounded-sm border border-border">
-              {nodes.map((n) => (
-                <button
-                  key={n.id}
-                  type="button"
-                  onClick={() => setActive(n.id)}
-                  className={cn(
-                    "flex w-full items-center justify-between px-3 py-2.5 text-left font-mono text-xs transition-colors",
-                    n.id === active
-                      ? "bg-primary/10 text-primary"
-                      : "bg-surface/40 text-muted-foreground hover:text-foreground",
-                  )}
-                >
-                  {n.title}
-                  <span>{n.id === active ? "●" : "○"}</span>
-                </button>
-              ))}
-            </div>
-          </aside>
-        </div>
-      </Reveal>
+        <Reveal delay={100}>
+          <div className="grid gap-4">
+            {[
+              { t: "Runtime adapters", b: "Connect to existing agent frameworks and tool environments." },
+              { t: "Policy engine", b: "Evaluate actions against configurable rules and constraints." },
+              { t: "Execution graph", b: "Track, coordinate, and reconstruct agent runs." },
+              { t: "Control API", b: "Pause, resume, redirect, or terminate execution programmatically." },
+            ].map((i, idx) => (
+              <div key={i.t} className="panel p-5">
+                <span className="label-mono text-primary">{String(idx + 1).padStart(2, "0")}</span>
+                <h3 className="mt-3 text-base font-semibold">{i.t}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{i.b}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </div>
     </Section>
   );
 }

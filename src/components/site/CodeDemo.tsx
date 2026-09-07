@@ -59,12 +59,12 @@ export function CodeDemo() {
         </div>
 
         <Reveal delay={100}>
-          <div ref={ref} className="panel overflow-hidden" style={{ boxShadow: "var(--shadow-panel)" }}>
+          <div ref={ref} className="panel tech-frame scanlines overflow-hidden" style={{ boxShadow: "var(--shadow-panel)" }}>
             <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
               <span className="label-mono">supervisor.py</span>
               <span className="label-mono text-primary">conceptual</span>
             </div>
-            <pre className="overflow-x-auto p-6 font-mono text-[13px] leading-relaxed text-foreground/90">
+            <pre className="relative z-10 overflow-x-auto p-6 font-mono text-[13px] leading-relaxed text-foreground/90">
               <code>
                 {typed}
                 <span className="ml-0.5 inline-block h-4 w-2 translate-y-0.5 bg-primary" style={{ animation: "sulcus-caret 1s steps(1) infinite" }} />

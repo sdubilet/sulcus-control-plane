@@ -1,44 +1,28 @@
-import { Section, Reveal } from "./primitives";
-import markAsset from "@/assets/sulcus-mark.png.asset.json";
-
-const traits = ["observable.", "controllable.", "coordinated.", "governable."];
+import { Section, Headline, Lede, Reveal } from "./primitives";
+import { WordmarkMark } from "./Wordmark";
 
 export function Vision() {
   return (
-    <Section id="vision" index="15" label="Vision" className="overflow-hidden">
-      <div className="relative">
-        <div className="grid-bg pointer-events-none absolute inset-0 -m-20 [mask-image:radial-gradient(60%_60%_at_30%_50%,black,transparent)]" />
-        <img
-          src={markAsset.url}
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-24 top-1/2 hidden w-[440px] -translate-y-1/2 select-none opacity-[0.06] lg:block"
-        />
-        <div className="relative">
+    <Section id="vision" index="15" label="Vision">
+      <div className="relative overflow-hidden rounded-xl border border-border bg-gradient-to-br from-surface/60 to-surface-2/40 px-6 py-20 md:px-12 md:py-28">
+        <div className="pointer-events-none absolute right-0 top-0 opacity-[0.06]" aria-hidden="true">
+          <WordmarkMark className="h-64 w-64 text-primary md:h-96 md:w-96" />
+        </div>
+        <div className="relative z-10 max-w-3xl">
           <Reveal>
-            <h2 className="max-w-4xl text-balance text-3xl font-semibold leading-[1.05] md:text-6xl">
-              Autonomous systems will need operating infrastructure.
-            </h2>
+            <Headline>Control is the foundation of autonomy at scale.</Headline>
           </Reveal>
-          <Reveal delay={100}>
-            <p className="mt-10 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
-              As AI systems become increasingly capable of acting independently, software
-              infrastructure must evolve from simply executing code to supervising autonomous
-              behavior.
-            </p>
+          <Reveal delay={80}>
+            <Lede className="mt-6">
+              The future of computing includes autonomous systems operating continuously on behalf of
+              organizations. Sulcus is building the infrastructure layer that makes that future
+              safe, inspectable, and governable.
+            </Lede>
           </Reveal>
-          <Reveal delay={160}>
-            <div className="mt-12 flex flex-wrap gap-x-10 gap-y-4">
-              {traits.map((t) => (
-                <span key={t} className="font-display text-xl text-primary md:text-2xl">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </Reveal>
-          <Reveal delay={220}>
-            <p className="mt-16 max-w-3xl border-t border-border pt-10 text-2xl font-semibold leading-tight md:text-4xl">
-              We are building the infrastructure that makes autonomy deployable.
+          <Reveal delay={140}>
+            <p className="mt-8 border-l-2 border-primary pl-5 text-base leading-relaxed md:text-lg">
+              We believe the most important infrastructure for the agent era will be the layer that
+              controls what agents can do.
             </p>
           </Reveal>
         </div>

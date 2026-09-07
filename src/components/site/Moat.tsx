@@ -28,16 +28,16 @@ export function Moat() {
         <div className="grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2">
           {items.map((i, idx) => (
             <Reveal key={i.t} delay={idx * 60} className="bg-background">
-              <article className="h-full bg-surface/50 p-6">
-                <h3 className="text-base font-semibold">{i.t}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{i.b}</p>
+              <article className="relative h-full overflow-hidden bg-surface/50 p-6">
+                <h3 className="relative z-10 text-base font-semibold">{i.t}</h3>
+                <p className="relative z-10 mt-3 text-sm leading-relaxed text-muted-foreground">{i.b}</p>
               </article>
             </Reveal>
           ))}
         </div>
 
         <Reveal delay={120}>
-          <div className="panel flex h-full flex-col justify-center gap-4 p-8">
+          <div className="panel tech-frame flex h-full flex-col justify-center gap-4 p-8">
             <div className="grid grid-cols-2 gap-2">
               {frameworks.map((f) => (
                 <div key={f} className="rounded-sm border border-border bg-surface-2/60 px-3 py-3 text-center font-mono text-[11px] text-muted-foreground">
