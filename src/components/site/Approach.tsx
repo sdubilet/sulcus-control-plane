@@ -1,68 +1,59 @@
 import { Section, Headline, Lede, Reveal } from "./primitives";
-import { cn } from "@/lib/utils";
 
 const layers = [
-  { name: "APPLICATION", note: "product surface" },
-  { name: "AGENT FRAMEWORK", note: "how agents are built" },
-  { name: "SULCUS CONTROL & SUPERVISION LAYER", note: "how autonomous systems are operated", key: true },
-  { name: "TOOLS / MODELS / DATA / EXTERNAL SYSTEMS", note: "what agents act on" },
-  { name: "INFRASTRUCTURE", note: "compute, storage, network" },
+  { t: "Execution", b: "Agent runtimes, frameworks, and tool calls." },
+  { t: "Supervision", b: "Policy enforcement, observation, and intervention." },
+  { t: "Control", b: "Governance, coordination, and system-level decision authority." },
 ];
 
 export function Approach() {
   return (
-    <Section id="approach" index="03" label="The approach">
-      <div className="grid gap-14 lg:grid-cols-[1fr_1.05fr] lg:items-center">
+    <Section id="approach" index="03" label="Our approach">
+      <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
         <div>
           <Reveal>
-            <Headline>From agent framework to production infrastructure.</Headline>
+            <Headline>A control plane for agent execution.</Headline>
           </Reveal>
           <Reveal delay={80}>
             <Lede className="mt-6">
-              Agent frameworks — LangGraph and others — help developers construct agent workflows.
-              Sulcus operates at a different layer.
+              Sulcus is designed as a layer between agent decision-making and the real world. It does
+              not replace frameworks. It supervises them.
             </Lede>
           </Reveal>
           <Reveal delay={140}>
-            <p className="mt-6 border-l-2 border-primary pl-5 text-base leading-relaxed md:text-lg">
-              Frameworks define how agents are built. Sulcus focuses on how autonomous systems are
-              operated and controlled.
+            <p className="mt-8 text-base leading-relaxed md:text-lg">
+              We think of it as the difference between a car that drives and a traffic system that
+              makes driving safe at scale.
             </p>
           </Reveal>
         </div>
 
-        <Reveal delay={120}>
-          <div className="relative space-y-2 p-6 panel tech-frame">
-            <div className="absolute -left-3 top-1/2 hidden h-24 w-24 -translate-y-1/2 rounded-full border border-border/40 lg:block">
-              <span className="absolute inset-0 rounded-full border border-border/30 anim-ring" />
-            </div>
-            {layers.map((l, i) => (
-              <div key={l.name}>
+        <Reveal delay={100}>
+          <div className="panel tech-frame relative overflow-hidden p-8">
+            <span className="pointer-events-none absolute right-5 top-5 font-mono text-[10px] text-muted-foreground">layer_03</span>
+            <div className="space-y-4">
+              {layers.map((l, i) => (
                 <div
-                  className={cn(
-                    "flex flex-wrap items-center justify-between gap-2 rounded-sm border px-5 py-4 transition-colors",
-                    l.key
-                      ? "border-primary/60 bg-primary/[0.07]"
-                      : "border-border bg-surface/40",
-                  )}
-                  style={l.key ? { boxShadow: "var(--glow-signal)" } : undefined}
+                  key={l.t}
+                  className="relative rounded-sm border px-5 py-5"
+                  style={{
+                    borderColor: i === 1 ? "rgba(255,122,26,0.45)" : "var(--border)",
+                    background: i === 1 ? "rgba(255,122,26,0.06)" : "var(--surface-2)",
+                    boxShadow: i === 1 ? "var(--glow-signal)" : undefined,
+                  }}
                 >
-                  <span
-                    className={cn(
-                      "font-mono text-xs tracking-[0.14em]",
-                      l.key ? "text-primary" : "text-foreground/80",
-                    )}
-                  >
-                    {l.name}
-                  </span>
-                  <span className="font-mono text-[11px] text-muted-foreground">{l.note}</span>
+                  <div className="flex items-center gap-3">
+                    <span className="label-mono w-6 text-primary">{String(i + 1).padStart(2, "0")}</span>
+                    <h3 className="text-base font-semibold">{l.t}</h3>
+                  </div>
+                  <p className="mt-2 pl-9 text-sm text-muted-foreground">{l.b}</p>
                 </div>
-                {i < layers.length - 1 && (
-                  <div className="mx-auto h-4 w-px bg-border-strong" aria-hidden="true" />
-                )}
-              </div>
-            ))}
-            <span className="pointer-events-none absolute -right-2 -top-2 font-mono text-[10px] text-muted-foreground">layer_03</span>
+              ))}
+            </div>
+            <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.08]" aria-hidden="true">
+              <div className="h-64 w-64 rounded-full border border-primary" />
+              <div className="absolute inset-0 m-auto h-48 w-48 rounded-full border border-primary" />
+            </div>
           </div>
         </Reveal>
       </div>
