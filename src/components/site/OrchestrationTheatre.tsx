@@ -332,7 +332,7 @@ export function OrchestrationTheatre() {
               CONTROL PLANE
             </text>
             <g>
-              <circle cx={W - 172} cy={140} r={3} fill="var(--primary)" className={reduced ? undefined : "anim-pulse-node"} />
+              <circle cx={W - 190} cy={140} r={3} fill="var(--primary)" className={reduced ? undefined : "anim-pulse-node"} />
               <text x={W - 54} y={144} textAnchor="end" fontSize="9.5" fontFamily="var(--font-mono)" fill="var(--muted-foreground)">
                 continuous evaluation
               </text>
@@ -396,7 +396,7 @@ export function OrchestrationTheatre() {
             strokeDasharray="2 6"
             style={{ transition: "stroke-opacity 300ms ease" }}
           />
-          <text x={44} y={FIELD_Y + 4} fontSize="8.5" letterSpacing="2.4" fontFamily="var(--font-mono)" fill="var(--muted-foreground)">
+          <text x={W - 44} textAnchor="end" y={FIELD_Y + 8} fontSize="8.5" letterSpacing="2.4" fontFamily="var(--font-mono)" fill="var(--muted-foreground)">
             SUPERVISED EXECUTION FIELD · AGENT NETWORK
           </text>
 
