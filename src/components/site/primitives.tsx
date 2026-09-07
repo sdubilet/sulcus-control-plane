@@ -28,7 +28,7 @@ export function Reveal({
 
 export function useInView<T extends HTMLElement>(threshold = 0.1) {
   const ref = useRef<T | null>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const el = ref.current;
@@ -45,6 +45,7 @@ export function useInView<T extends HTMLElement>(threshold = 0.1) {
 
   return { ref, visible };
 }
+
 
 export function Headline({ children, className }: { children: ReactNode; className?: string }) {
   return (
