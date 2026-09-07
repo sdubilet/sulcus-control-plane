@@ -1,4 +1,5 @@
 import { Section, Headline, Lede, Reveal } from "./primitives";
+import { MetaballMark } from "./Motifs";
 
 const caps = [
   { n: "01", t: "Observe", b: "Understand every agent, action, tool call, state transition, and event." },
@@ -23,7 +24,14 @@ export function Product() {
         {caps.map((c, i) => (
           <Reveal key={c.n} delay={i * 60} className="bg-background">
             <article className="group relative h-full overflow-hidden bg-surface/50 p-7 transition-colors hover:bg-surface-2/70">
-              <span className="label-mono text-primary">{c.n}</span>
+              <div className="dot-matrix pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-40" />
+              <div className="relative z-10 flex items-start justify-between">
+                <span className="label-mono text-primary">{c.n}</span>
+                <MetaballMark
+                  variant={i}
+                  className="h-10 w-10 text-foreground/40 transition-all duration-500 group-hover:scale-110 group-hover:text-primary/80"
+                />
+              </div>
               <h3 className="relative z-10 mt-5 text-xl font-semibold">{c.t}</h3>
               <p className="relative z-10 mt-3 text-sm leading-relaxed text-muted-foreground">{c.b}</p>
               <div className="mt-6 h-px w-8 bg-border-strong transition-all duration-500 group-hover:w-full group-hover:bg-primary/60" />
