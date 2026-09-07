@@ -5,10 +5,8 @@ import { cn } from "@/lib/utils";
 
 const links = [
   { href: "#problem", label: "Problem" },
-  { href: "#architecture", label: "Architecture" },
+  { href: "#coordination", label: "Architecture" },
   { href: "#product", label: "Product" },
-  { href: "#demo", label: "Demo" },
-  { href: "#vision", label: "Vision" },
 ];
 
 export function Nav() {

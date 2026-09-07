@@ -3,7 +3,6 @@ import { Navigation } from "@/components/site/Navigation";
 import { Hero } from "@/components/site/Hero";
 import { Problem } from "@/components/site/Problem";
 import { Approach } from "@/components/site/Approach";
-import { Architecture } from "@/components/site/Architecture";
 import { Coordination } from "@/components/site/Coordination";
 import { Product } from "@/components/site/Product";
 import { CodeDemo } from "@/components/site/CodeDemo";
@@ -13,9 +12,6 @@ import { Compare } from "@/components/site/Compare";
 import { Moat } from "@/components/site/Moat";
 import { BusinessModel } from "@/components/site/BusinessModel";
 import { Customers } from "@/components/site/Customers";
-import { FlagshipDemo } from "@/components/site/FlagshipDemo";
-import { Vision } from "@/components/site/Vision";
-import { Team } from "@/components/site/Team";
 import { InvestorCTA } from "@/components/site/InvestorCTA";
 import { Footer } from "@/components/site/Footer";
 
@@ -65,7 +61,6 @@ function HomePage() {
         <Hero />
         <Problem />
         <Approach />
-        <Architecture />
         <Coordination />
         <Product />
         <CodeDemo />
@@ -75,9 +70,6 @@ function HomePage() {
         <Moat />
         <BusinessModel />
         <Customers />
-        <FlagshipDemo />
-        <Vision />
-        <Team />
         <InvestorCTA />
       </main>
       <Footer />
