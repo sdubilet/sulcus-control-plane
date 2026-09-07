@@ -1,4 +1,5 @@
 import { Section, Headline, Lede, Reveal } from "./primitives";
+import { cn } from "@/lib/utils";
 
 const problems = [
   {
@@ -63,12 +64,18 @@ export function Problem() {
 
       <Reveal delay={120}>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
-          <div className="panel p-6">
-            <p className="label-mono mb-4">deterministic execution</p>
+          <div className="panel tech-frame p-6">
+            <div className="mb-4 flex items-center justify-between">
+              <p className="label-mono">deterministic execution</p>
+              <span className="font-mono text-[10px] text-muted-foreground">exec_001</span>
+            </div>
             <Chain tone="muted" items={["Application", "Function", "Result"]} />
           </div>
-          <div className="panel p-6">
-            <p className="label-mono mb-4">agentic execution</p>
+          <div className="panel tech-frame p-6">
+            <div className="mb-4 flex items-center justify-between">
+              <p className="label-mono">agentic execution</p>
+              <span className="font-mono text-[10px] text-primary">exec_002</span>
+            </div>
             <Chain
               tone="signal"
               items={[
@@ -88,13 +95,13 @@ export function Problem() {
       <div className="mt-6 grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-3">
         {problems.map((p, i) => (
           <Reveal key={p.n} delay={i * 70} className="bg-background">
-            <article className="group h-full bg-surface/50 p-6 transition-colors hover:bg-surface-2/60">
+            <article className="group relative h-full overflow-hidden bg-surface/50 p-6 transition-colors hover:bg-surface-2/60">
               <div className="flex items-baseline justify-between">
                 <span className="label-mono text-primary">{p.n}</span>
                 <span className="h-px w-6 bg-border-strong transition-all group-hover:w-10 group-hover:bg-primary" />
               </div>
-              <h3 className="mt-6 text-lg font-semibold">{p.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+              <h3 className="relative z-10 mt-6 text-lg font-semibold">{p.title}</h3>
+              <p className="relative z-10 mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
             </article>
           </Reveal>
         ))}

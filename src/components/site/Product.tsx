@@ -22,10 +22,10 @@ export function Product() {
       <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
         {caps.map((c, i) => (
           <Reveal key={c.n} delay={i * 60} className="bg-background">
-            <article className="group h-full bg-surface/50 p-7 transition-colors hover:bg-surface-2/70">
+            <article className="group relative h-full overflow-hidden bg-surface/50 p-7 transition-colors hover:bg-surface-2/70">
               <span className="label-mono text-primary">{c.n}</span>
-              <h3 className="mt-5 text-xl font-semibold">{c.t}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.b}</p>
+              <h3 className="relative z-10 mt-5 text-xl font-semibold">{c.t}</h3>
+              <p className="relative z-10 mt-3 text-sm leading-relaxed text-muted-foreground">{c.b}</p>
               <div className="mt-6 h-px w-8 bg-border-strong transition-all duration-500 group-hover:w-full group-hover:bg-primary/60" />
             </article>
           </Reveal>

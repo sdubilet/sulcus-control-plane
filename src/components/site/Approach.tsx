@@ -32,7 +32,10 @@ export function Approach() {
         </div>
 
         <Reveal delay={120}>
-          <div className="space-y-2">
+          <div className="relative space-y-2 p-6 panel tech-frame">
+            <div className="absolute -left-3 top-1/2 hidden h-24 w-24 -translate-y-1/2 rounded-full border border-border/40 lg:block">
+              <span className="absolute inset-0 rounded-full border border-border/30 anim-ring" />
+            </div>
             {layers.map((l, i) => (
               <div key={l.name}>
                 <div
@@ -59,6 +62,7 @@ export function Approach() {
                 )}
               </div>
             ))}
+            <span className="pointer-events-none absolute -right-2 -top-2 font-mono text-[10px] text-muted-foreground">layer_03</span>
           </div>
         </Reveal>
       </div>

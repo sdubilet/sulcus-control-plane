@@ -31,7 +31,7 @@ export function BusinessModel() {
 
       <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1.3fr]">
         <Reveal>
-          <div className="panel h-full p-7">
+          <div className="panel tech-frame h-full p-7">
             <p className="label-mono">potential model</p>
             <ul className="mt-6 space-y-4">
               {model.map((m) => (
@@ -45,7 +45,7 @@ export function BusinessModel() {
         </Reveal>
 
         <Reveal delay={100}>
-          <div className="panel h-full p-7">
+          <div className="panel tech-frame h-full p-7">
             <p className="label-mono">expansion loop</p>
             <div className="mt-6 space-y-3">
               {loop.map((l, i) => (

@@ -24,7 +24,7 @@ export function Customers() {
       <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
         {segments.map((s, i) => (
           <Reveal key={s.t} delay={i * 60} className="bg-background">
-            <article className="h-full bg-surface/50 p-7">
+            <article className="h-full bg-surface/50 p-7 transition-colors hover:bg-surface-2/60">
               <span className="label-mono text-primary">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="mt-5 text-lg font-semibold">{s.t}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.b}</p>

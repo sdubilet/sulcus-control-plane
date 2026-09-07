@@ -38,7 +38,7 @@ export function Compare() {
       </Reveal>
 
       <Reveal delay={120}>
-        <div className="mt-12 overflow-x-auto rounded-lg border border-border">
+        <div className="mt-12 overflow-x-auto rounded-lg border border-border tech-frame">
           <table className="w-full min-w-[720px] border-collapse text-sm">
             <caption className="sr-only">Capability focus by infrastructure layer</caption>
             <thead>

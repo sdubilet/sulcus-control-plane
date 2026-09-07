@@ -30,8 +30,11 @@ export function Coordination() {
 
       <div className="mt-12 grid gap-6 lg:grid-cols-3">
         <Reveal className="lg:col-span-2">
-          <div className="panel p-6">
-            <p className="label-mono">simultaneous execution</p>
+          <div className="panel tech-frame p-6">
+            <div className="mb-4 flex items-center justify-between">
+              <p className="label-mono">simultaneous execution</p>
+              <span className="font-mono text-[10px] text-muted-foreground">coord_05</span>
+            </div>
             <div className="mt-5 space-y-3">
               {pairs.map((p, i) => (
                 <div key={p.a} className="flex items-center gap-3">
@@ -60,7 +63,7 @@ export function Coordination() {
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="panel h-full p-6">
+          <div className="panel tech-frame h-full p-6">
             <p className="label-mono">failure modes without a control layer</p>
             <ul className="mt-5 space-y-3">
               {risks.map((r) => (

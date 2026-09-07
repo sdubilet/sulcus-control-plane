@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * SULCUS design system — dark, technical, infrastructure-grade.
+ * SULCUS design system — pure black canvas, signal orange, technical wireframe.
  * All colors in oklch. Never hardcode colors in components.
  */
 
@@ -16,8 +16,8 @@
   --radius-xl: calc(var(--radius) + 6px);
   --radius-2xl: calc(var(--radius) + 10px);
 
-  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", "Inter Tight", ui-sans-serif, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", "Manrope", ui-sans-serif, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
   --color-background: var(--background);
@@ -49,37 +49,37 @@
 :root {
   --radius: 0.25rem;
 
-  --background: oklch(0.16 0.008 250);
-  --foreground: oklch(0.95 0.005 250);
-  --surface: oklch(0.19 0.009 250);
-  --surface-2: oklch(0.22 0.01 250);
-  --card: oklch(0.19 0.009 250);
-  --card-foreground: oklch(0.95 0.005 250);
-  --popover: oklch(0.19 0.009 250);
-  --popover-foreground: oklch(0.95 0.005 250);
+  --background: oklch(0 0 0);
+  --foreground: oklch(0.96 0.005 250);
+  --surface: oklch(0.09 0.005 250);
+  --surface-2: oklch(0.14 0.008 250);
+  --card: oklch(0.09 0.005 250);
+  --card-foreground: oklch(0.96 0.005 250);
+  --popover: oklch(0.09 0.005 250);
+  --popover-foreground: oklch(0.96 0.005 250);
 
-  --primary: oklch(0.75 0.17 55);
+  --primary: oklch(0.72 0.18 55);
   --primary-foreground: oklch(0.18 0.02 60);
-  --secondary: oklch(0.24 0.012 250);
+  --secondary: oklch(0.14 0.008 250);
   --secondary-foreground: oklch(0.93 0.005 250);
-  --muted: oklch(0.24 0.012 250);
-  --muted-foreground: oklch(0.68 0.012 250);
-  --accent: oklch(0.7 0.14 40);
+  --muted: oklch(0.14 0.008 250);
+  --muted-foreground: oklch(0.62 0.012 250);
+  --accent: oklch(0.7 0.16 45);
   --accent-foreground: oklch(0.16 0.008 250);
-  --signal: oklch(0.75 0.17 55);
+  --signal: oklch(0.72 0.18 55);
   --warn: oklch(0.8 0.15 78);
   --destructive: oklch(0.66 0.19 22);
   --destructive-foreground: oklch(0.97 0.005 250);
 
-  --border: oklch(0.29 0.01 250);
-  --border-strong: oklch(0.4 0.014 250);
-  --input: oklch(0.29 0.01 250);
-  --ring: oklch(0.75 0.17 55);
+  --border: oklch(0.22 0.01 250);
+  --border-strong: oklch(0.38 0.014 250);
+  --input: oklch(0.22 0.01 250);
+  --ring: oklch(0.72 0.18 55);
 
-  --grid-line: oklch(1 0 0 / 4%);
+  --grid-line: oklch(1 0 0 / 5%);
   --glow-signal: 0 0 0 1px color-mix(in oklab, var(--signal) 40%, transparent),
     0 0 32px -8px color-mix(in oklab, var(--signal) 55%, transparent);
-  --shadow-panel: 0 24px 64px -32px oklch(0 0 0 / 80%);
+  --shadow-panel: 0 24px 64px -32px oklch(0 0 0 / 90%);
 }
 
 @layer base {
@@ -153,6 +153,77 @@
   }
 }
 
+@utility scanlines {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 2px,
+      color-mix(in oklab, var(--foreground) 2%, transparent) 2px,
+      color-mix(in oklab, var(--foreground) 2%, transparent) 4px
+    );
+    border-radius: inherit;
+  }
+}
+
+@utility dot-matrix {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, color-mix(in oklab, var(--foreground) 4%, transparent) 1px, transparent 1px);
+    background-size: 8px 8px;
+    border-radius: inherit;
+  }
+}
+
+@utility tech-frame {
+  position: relative;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: var(--color-border-strong);
+    border-style: solid;
+    pointer-events: none;
+  }
+  &::before {
+    top: -1px;
+    left: -1px;
+    border-width: 1px 0 0 1px;
+  }
+  &::after {
+    bottom: -1px;
+    right: -1px;
+    border-width: 0 1px 1px 0;
+  }
+}
+
+@utility section-num {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: clamp(8rem, 18vw, 16rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: color-mix(in oklab, var(--foreground) 3%, transparent);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
 @keyframes sulcus-pulse {
   0%,
   100% {
@@ -189,6 +260,17 @@
   }
 }
 
+@keyframes sulcus-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
 @utility anim-pulse-node {
   animation: sulcus-pulse 3.2s ease-in-out infinite;
 }
@@ -196,6 +278,10 @@
 @utility anim-flow {
   stroke-dasharray: 4 10;
   animation: sulcus-dash 6s linear infinite;
+}
+
+@utility anim-ring {
+  animation: sulcus-ring 2.4s ease-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -63,13 +63,23 @@ export function Section({
 }) {
   return (
     <section id={id} className={cn("relative border-t border-border", className)}>
-      <div className="mx-auto w-full max-w-6xl px-6 py-24 md:py-32">
+      <div className="relative mx-auto w-full max-w-6xl px-6 py-24 md:py-32">
         {(index || label) && (
           <Reveal>
-            <div className="mb-10 flex items-center gap-3">
-              {index && <span className="label-mono text-primary">{index}</span>}
+            <div className="relative mb-10 flex items-center gap-3">
+              {index && (
+                <span className="label-mono relative z-10 text-primary">{index}</span>
+              )}
               {index && label && <span className="h-px w-8 bg-border-strong" />}
-              {label && <span className="label-mono">{label}</span>}
+              {label && <span className="label-mono relative z-10">{label}</span>}
+              {index && (
+                <span
+                  className="pointer-events-none absolute -left-6 top-1/2 -translate-y-1/2 font-mono text-[10rem] font-bold leading-none text-foreground/[0.03] md:-left-10 md:text-[14rem]"
+                  aria-hidden="true"
+                >
+                  {index}
+                </span>
+              )}
             </div>
           </Reveal>
         )}

@@ -41,13 +41,20 @@ export function Architecture() {
 
       <Reveal delay={120}>
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-          <div className="panel overflow-hidden">
+          <div className="panel tech-frame overflow-hidden">
             <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
               <span className="label-mono">system topology</span>
               <span className="label-mono text-primary">event flow active</span>
             </div>
-            <div className="overflow-x-auto p-4">
+            <div className="relative overflow-x-auto p-4">
               <svg viewBox="0 0 840 400" className="h-[340px] w-full min-w-[640px]" role="img" aria-label="Sulcus architecture diagram">
+                {/* radar rings behind control plane */}
+                <g opacity="0.12">
+                  <circle cx="420" cy="205" r="60" fill="none" stroke="var(--border-strong)" strokeWidth="1" />
+                  <circle cx="420" cy="205" r="110" fill="none" stroke="var(--border-strong)" strokeWidth="1" />
+                  <circle cx="420" cy="205" r="160" fill="none" stroke="var(--border-strong)" strokeWidth="1" />
+                </g>
+
                 {/* connectors */}
                 {["155,100 155,170", "415,100 415,170", "680,100 680,170"].map((pts, i) => (
                   <polyline
@@ -109,10 +116,11 @@ export function Architecture() {
                   );
                 })}
               </svg>
+              <span className="pointer-events-none absolute right-5 top-5 font-mono text-[10px] text-muted-foreground">topo_04</span>
             </div>
           </div>
 
-          <aside className="panel flex flex-col p-6">
+          <aside className="panel tech-frame flex flex-col p-6">
             <span className="label-mono text-primary">{current.tier}</span>
             <h3 className="mt-4 text-2xl font-semibold">{current.title}</h3>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{current.body}</p>
