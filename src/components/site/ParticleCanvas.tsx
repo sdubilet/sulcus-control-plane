@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const COUNT = 2200;
+const COUNT = 900;
 const THRESHOLD = 0.6;
 
 type Particle = {
@@ -40,6 +40,11 @@ export function ParticleCanvas({ scrollProgress }: { scrollProgress: number }) {
   const particlesRef = useRef<Particle[]>([]);
   const rafRef = useRef<number | undefined>(undefined);
   const dprRef = useRef(1);
+  const scrollRef = useRef(scrollProgress);
+
+  useEffect(() => {
+    scrollRef.current = scrollProgress;
+  }, [scrollProgress]);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -65,32 +70,36 @@ export function ParticleCanvas({ scrollProgress }: { scrollProgress: number }) {
     resize();
     window.addEventListener("resize", resize);
 
-    const W = () => canvas.width / dprRef.current;
-    const H = () => canvas.height / dprRef.current;
+    const w0 = () => canvas.width / dprRef.current;
+    const h0 = () => canvas.height / dprRef.current;
 
     if (particlesRef.current.length === 0) {
-      particlesRef.current = Array.from({ length: COUNT }, () => createParticle(W(), H()));
+      const w = w0();
+      const h = h0();
+      particlesRef.current = Array.from({ length: COUNT }, () => createParticle(w, h)).sort(
+        (a, b) => b.z - a.z,
+      );
     }
 
     let last = performance.now();
     const step = (t: number) => {
       const dt = Math.min((t - last) / 16.67, 2);
       last = t;
-      const w = W();
-      const h = H();
+      const w = w0();
+      const h = h0();
       const lineY = h * THRESHOLD;
+      const sp = scrollRef.current;
 
       ctx.setTransform(dprRef.current, 0, 0, dprRef.current, 0, 0);
       ctx.clearRect(0, 0, w, h);
 
-      const sorted = particlesRef.current.slice().sort((a, b) => b.z - a.z);
-      for (const p of sorted) {
+      for (const p of particlesRef.current) {
         updateParticle(p, w, h, lineY, dt);
-        drawParticle(ctx, p, w, h, lineY, scrollProgress);
+        drawParticle(ctx, p, w, h, lineY, sp);
       }
 
       ctx.save();
-      ctx.globalAlpha = 0.55 - scrollProgress * 0.45;
+      ctx.globalAlpha = 0.55 - sp * 0.45;
       ctx.strokeStyle = "rgba(255,255,255,0.35)";
       ctx.lineWidth = 1;
       ctx.setLineDash([4, 8]);
@@ -108,7 +117,7 @@ export function ParticleCanvas({ scrollProgress }: { scrollProgress: number }) {
       window.removeEventListener("resize", resize);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [prefersReduced, scrollProgress]);
+  }, [prefersReduced]);
 
   if (prefersReduced) {
     return (
