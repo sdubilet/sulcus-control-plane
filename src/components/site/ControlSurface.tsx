@@ -163,10 +163,10 @@ const SCRIPT: Array<{ actor: string; text: string; verdict: Verdict }> = [
   { actor: "KIMI", text: "Requested external API", verdict: "allowed" },
   { actor: "RESEARCH", text: "Indexed 12 sources", verdict: "allowed" },
   { actor: "CODEX", text: "Attempted production write", verdict: "denied" },
-  { actor: "SULCUS", text: "Policy boundary enforced", verdict: "permission" },
+  { actor: "SULCUS", text: "Policy boundary enforced", verdict: "denied" },
   { actor: "CLAUDE CODE", text: "Attempted production deployment", verdict: "permission" },
   { actor: "SULCUS", text: "Approval required", verdict: "permission" },
-  { actor: "KIMI", text: "Token budget threshold 82%", verdict: "permission" },
+  { actor: "KIMI", text: "Token budget threshold 82%", verdict: "allowed" },
   { actor: "CLAUDE CODE", text: "Committed 3 files", verdict: "allowed" },
 ];
 
