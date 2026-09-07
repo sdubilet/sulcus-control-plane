@@ -20,7 +20,7 @@ type Agent = {
   budget: number;
 };
 
-type Verdict = "allowed" | "validated" | "paused" | "denied" | "approved" | "info";
+type Verdict = "allowed" | "permission" | "denied";
 
 type ActivityEvent = {
   id: number;
@@ -247,12 +247,16 @@ const elapsedStr = (s: number) => `${Math.floor(s / 60)}m ${pad(s % 60)}s`;
 
 const verdictClass: Record<Verdict, string> = {
   allowed: "text-ok",
-  validated: "text-primary",
-  paused: "text-warn",
+  permission: "text-warn",
   denied: "text-danger",
-  approved: "text-ok",
-  info: "text-primary",
 };
+
+const verdictLabel: Record<Verdict, string> = {
+  allowed: "allowed",
+  permission: "permission requested",
+  denied: "denied",
+};
+
 
 const statusLabel: Record<AgentStatus, string> = {
   running: "RUNNING",
