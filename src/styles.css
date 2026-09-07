@@ -26,6 +26,14 @@
   --radius-xl: var(--radius-xl);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
+  --color-warn: var(--warn);
+  --color-ok: var(--ok);
+  --color-danger: var(--danger);
+  --color-signal: var(--signal);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border-strong: var(--border-strong);
 }
 
 :root {
