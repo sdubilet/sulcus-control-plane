@@ -159,13 +159,8 @@ export function ControlPlaneSchematic() {
             })}
           </g>
 
-          {/* ── Layer label ── */}
-          <text x={40} y={330} fontSize="9.5" letterSpacing="2.4" fontFamily="var(--font-mono)" fill="var(--foreground)">
-            AGENTS &amp; FRAMEWORKS
-          </text>
-          <text x={40} y={346} fontSize="9" fontFamily="var(--font-mono)" fill="var(--muted-foreground)">
-            Different models • Different frameworks • Different capabilities
-          </text>
+
+
 
           {/* ── Sulcus ↕ agents (control down, events up) ── */}
           {AGENTS.map((a) => {
