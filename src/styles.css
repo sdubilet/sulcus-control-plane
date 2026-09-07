@@ -26,6 +26,14 @@
   --radius-xl: var(--radius-xl);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
+  --color-warn: var(--warn);
+  --color-ok: var(--ok);
+  --color-danger: var(--danger);
+  --color-signal: var(--signal);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border-strong: var(--border-strong);
 }
 
 :root {
@@ -56,6 +64,8 @@
 
   --signal: #FF7A1A;
   --warn: #FFB020;
+  --ok: #3FBF7F;
+  --danger: #FF4A3A;
   --surface: #0a0a0a;
   --surface-2: #141414;
   --surface-3: #1a1a1a;
