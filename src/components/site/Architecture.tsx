@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Section, Headline, Lede, Reveal } from "./primitives";
-import { cn } from "@/lib/utils";
+import { ControlPlaneSchematic } from "./ControlPlaneSchematic";
+
 
 const nodes = [
   { id: "agents", label: "Agents", x: 90, y: 70 },
@@ -33,6 +34,20 @@ export function Architecture() {
           without requiring teams to rebuild their systems.
         </Lede>
       </Reveal>
+
+      <div className="mt-14">
+        <Reveal>
+          <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">
+            One control layer for every agent.
+          </h3>
+          <p className="mt-3 max-w-2xl text-sm text-muted-foreground md:text-base">
+            Agents execute. Agents collaborate. Sulcus observes, validates, reasons, and controls.
+          </p>
+        </Reveal>
+        <Reveal delay={80} className="mt-6">
+          <ControlPlaneSchematic />
+        </Reveal>
+      </div>
 
       <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1fr]">
         <Reveal>
