@@ -4,11 +4,9 @@ import logoAsset from "@/assets/sulcus-mark.png.asset.json";
 export function WordmarkMark({ className }: { className?: string }) {
   return (
     <img
-      src={logoAsset.src}
+      src={logoAsset.url}
       alt="Sulcus mark"
       className={cn("inline-block object-contain", className)}
-      width={logoAsset.width}
-      height={logoAsset.height}
       loading="eager"
       decoding="async"
     />
