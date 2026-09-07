@@ -144,8 +144,8 @@ function usePrefersReducedMotion() {
 }
 
 export function OrchestrationTheatre() {
-  const [scenarioId, setScenarioId] = useState("dev");
-  const scenario = SCENARIOS.find((s) => s.id === scenarioId)!;
+  const scenario = SCENARIOS[0]!;
+
   const [i, setI] = useState(0);
   const [hover, setHover] = useState<string | null>(null);
   const [hoverSulcus, setHoverSulcus] = useState(false);

@@ -66,10 +66,12 @@ export function Hero() {
         </Reveal>
         <Reveal delay={140}>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-foreground/75 md:text-xl">
-            Sulcus provides the infrastructure to supervise, coordinate, observe, and control AI-agent
-            systems in production.
+            The future of computing includes autonomous systems operating continuously on behalf of
+            organizations. Sulcus is building the infrastructure layer that makes that future safe,
+            inspectable, and governable.
           </p>
         </Reveal>
+
         <Reveal delay={200}>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link

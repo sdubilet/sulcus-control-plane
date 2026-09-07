@@ -6,6 +6,8 @@ const items = [
   { t: "Policy & control primitives", b: "The control model becomes embedded into production systems." },
   { t: "Developer integration", b: "Once integrated into an organization's agent infrastructure, switching costs increase." },
   { t: "Ecosystem position", b: "Sulcus can sit underneath multiple agent frameworks rather than betting on one." },
+  { t: "Governance record", b: "Every approval, denial and boundary becomes the audit trail organizations are accountable for — the layer holding that record is hard to replace." },
+
 ];
 
 const frameworks = ["Framework A", "Framework B", "Framework C", "Custom runtimes"];
