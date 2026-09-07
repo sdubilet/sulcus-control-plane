@@ -1,28 +1,8 @@
-import { useState } from "react";
 import { Section, Headline, Lede, Reveal } from "./primitives";
 import { ControlPlaneSchematic } from "./ControlPlaneSchematic";
 
 
-const nodes = [
-  { id: "agents", label: "Agents", x: 90, y: 70 },
-  { id: "tools", label: "Tools", x: 90, y: 180 },
-  { id: "sulcus", label: "Sulcus", x: 240, y: 125, primary: true },
-  { id: "observe", label: "Observe", x: 390, y: 55 },
-  { id: "govern", label: "Govern", x: 390, y: 125 },
-  { id: "intervene", label: "Intervene", x: 390, y: 195 },
-];
-
-const connections: [string, string][] = [
-  ["agents", "sulcus"],
-  ["tools", "sulcus"],
-  ["sulcus", "observe"],
-  ["sulcus", "govern"],
-  ["sulcus", "intervene"],
-];
-
 export function Architecture() {
-  const [active, setActive] = useState<string | null>("sulcus");
-
   return (
     <Section id="architecture" index="04" label="Architecture">
       <Reveal>
