@@ -1,25 +1,32 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Reveal } from "./primitives";
-import { ParticleCanvas } from "./ParticleCanvas";
+import { ParticleHead } from "./ParticleHead";
+import { HairlineRings } from "./Motifs";
 
 export function Hero() {
-  const [progress, setProgress] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
+  const progressRef = useRef(0);
+  const [fade, setFade] = useState(0);
 
   useEffect(() => {
     const hero = heroRef.current;
     if (!hero) return;
+    let raf = 0;
     const onScroll = () => {
       const rect = hero.getBoundingClientRect();
-      const heroHeight = rect.height;
       const scrolled = Math.max(0, -rect.top);
-      const p = Math.min(1, scrolled / (heroHeight * 0.65));
-      setProgress(p);
+      const p = Math.min(1, scrolled / (rect.height * 0.85));
+      progressRef.current = p;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setFade(p));
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
@@ -28,14 +35,26 @@ export function Hero() {
       ref={heroRef}
       className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-black"
     >
-      <ParticleCanvas scrollProgress={progress} />
+      <ParticleHead progressRef={progressRef} />
+
       <div
         className="pointer-events-none absolute inset-0 z-[1]"
         style={{
           background:
-            "radial-gradient(80% 70% at 0% 40%, rgba(0,0,0,0.85) 0%, transparent 60%), linear-gradient(to right, rgba(0,0,0,0.7) 0%, transparent 55%)",
+            "radial-gradient(75% 70% at 0% 45%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.55) 40%, transparent 68%), linear-gradient(to right, rgba(0,0,0,0.78) 0%, transparent 58%)",
         }}
       />
+
+      <div className="pointer-events-none absolute left-6 top-24 z-10 hidden md:block">
+        <p className="label-mono text-foreground/55">
+          python agent runtime · scan/01 · point cloud
+        </p>
+      </div>
+
+      <div className="pointer-events-none absolute right-[-6rem] top-1/2 z-[1] hidden -translate-y-1/2 text-foreground/40 lg:block">
+        <HairlineRings className="h-[520px] w-[520px]" />
+      </div>
+
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-32 md:pt-40">
         <Reveal>
           <p className="label-mono text-primary">SULCUS · CONTROL LAYER</p>
@@ -69,16 +88,16 @@ export function Hero() {
         </Reveal>
       </div>
 
-      <div className="pointer-events-none absolute bottom-[40%] left-6 z-10 hidden items-center gap-3 md:flex">
-        <span className="label-mono text-foreground/60">request boundary</span>
+      <div className="pointer-events-none absolute bottom-[18%] left-6 z-10 hidden items-center gap-3 md:flex">
+        <span className="label-mono text-foreground/60">decision boundary</span>
         <span className="h-px w-16 bg-foreground/30" />
       </div>
 
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-48"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-56"
         style={{
           background: "linear-gradient(to top, var(--background) 0%, transparent 100%)",
-          opacity: Math.min(1, progress * 1.5),
+          opacity: Math.min(1, fade * 1.6),
         }}
       />
     </section>
