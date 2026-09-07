@@ -615,7 +615,7 @@ export function OrchestrationTheatre() {
                         <span
                           className={cn(
                             "h-1.5 w-1.5 rounded-full",
-                            waiting ? "bg-signal" : busy(a.id) ? "bg-primary" : "bg-muted-foreground",
+                            waiting ? "bg-primary" : busy(a.id) ? "bg-primary" : "bg-muted-foreground",
                             busy(a.id) && !reduced && "anim-pulse-node",
                           )}
                         />
