@@ -7,7 +7,7 @@ export function Approach() {
       <div className="grid gap-10 lg:grid-cols-[1fr_1fr]">
         <div>
           <Reveal>
-            <Headline>Autonomy without losing control.</Headline>
+            <Headline>Built for Agent Chaos</Headline>
           </Reveal>
         </div>
         <div className="lg:pt-3">
