@@ -112,69 +112,7 @@ const DEV: Scenario = {
   ],
 };
 
-const OPS: Scenario = {
-  id: "ops",
-  label: "business operations",
-  user: "Run my grocery business.",
-  goal: "Stock → Sell → Reconcile → Reorder",
-  agents: [
-    { id: "inventory", label: "Inventory Agent", role: "POS / stock levels", task: "Track shelf stock", tools: ["POS", "Database"], x: COL[0]! },
-    { id: "accounting", label: "Accounting Agent", role: "Reconciliation", task: "Daily sales close", tools: ["Ledger", "Invoices"], x: COL[1]! },
-    { id: "market", label: "Market Research Agent", role: "Trends + competitors", task: "Category demand", tools: ["Browser"], x: COL[2]! },
-    { id: "purchasing", label: "Purchasing Agent", role: "Supplier orders", task: "Reorder proposals", tools: ["Suppliers", "Email"], x: COL[3]! },
-    { id: "customer", label: "Customer Agent", role: "Reviews + complaints", task: "Sentiment review", tools: ["Reviews", "Email"], x: COL[4]! },
-  ],
-  links: [
-    ["inventory", "accounting"],
-    ["inventory", "purchasing"],
-    ["market", "purchasing"],
-    ["customer", "market"],
-  ],
-  exec: ["POS", "Ledger", "Suppliers", "Email", "Database", "Browser", "Payments"],
-  steps: [
-    {
-      sulcus: "Goal received · assigning operating agents",
-      kind: "observe",
-      status: { inventory: "assigned", accounting: "assigned", market: "assigned", purchasing: "assigned", customer: "assigned" },
-    },
-    {
-      sulcus: "5 agents active · 2 tasks running",
-      kind: "observe",
-      busy: ["inventory", "accounting"],
-      status: { inventory: "counting stock", accounting: "reconciling sales", market: "scanning trends", purchasing: "idle", customer: "reading reviews" },
-    },
-    {
-      sulcus: "Signal · milk inventory below threshold",
-      kind: "observe",
-      busy: ["inventory"],
-      status: { inventory: "milk < threshold", accounting: "invoices generated", market: "oat milk demand ↑", purchasing: "listening", customer: "reading reviews" },
-      msg: { from: "inventory", to: "purchasing", text: "low stock: milk" },
-    },
-    {
-      sulcus: "Signals aligned · demand trend + stock gap",
-      kind: "reason",
-      busy: ["market", "purchasing"],
-      status: { inventory: "milk < threshold", accounting: "books current", market: "oat milk demand ↑", purchasing: "drafting order", customer: "complaint cluster" },
-      msg: { from: "market", to: "purchasing", text: "shift mix → oat milk" },
-      note: "recommend order · 120 units",
-    },
-    {
-      sulcus: "Approval required · supplier purchase",
-      kind: "control",
-      status: { inventory: "holding", accounting: "holding", market: "idle", purchasing: "awaiting approval", customer: "idle" },
-      approval: true,
-    },
-    {
-      sulcus: "Approved · authorizing Purchasing Agent",
-      kind: "control",
-      busy: ["purchasing", "accounting"],
-      status: { inventory: "restock pending", accounting: "PO booked", market: "monitoring", purchasing: "order submitted", customer: "monitoring" },
-      msg: { from: "purchasing", to: "accounting", text: "PO #4471" },
-    },
-  ],
-};
-
-const SCENARIOS = [DEV, OPS];
+const SCENARIOS = [DEV];
 
 /* ── geometry ───────────────────────────────────────────────── */
 
