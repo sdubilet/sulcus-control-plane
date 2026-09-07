@@ -196,28 +196,12 @@ export function OrchestrationTheatre() {
 
   return (
     <div ref={wrap} className="panel tech-frame relative overflow-hidden p-4 sm:p-6">
-      {/* header + scenario toggle */}
+      {/* header */}
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <p className="label-mono">orchestration · live simulation</p>
-        <div className="flex items-center gap-1 rounded-sm border border-border p-1">
-          {SCENARIOS.map((s) => (
-            <button
-              key={s.id}
-              type="button"
-              onClick={() => setScenarioId(s.id)}
-              aria-pressed={s.id === scenarioId}
-              className={cn(
-                "rounded-[2px] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors",
-                s.id === scenarioId
-                  ? "bg-primary/15 text-primary"
-                  : "text-muted-foreground hover:text-foreground",
-              )}
-            >
-              {s.label}
-            </button>
-          ))}
-        </div>
+        <p className="label-mono text-primary">{scenario.label}</p>
       </div>
+
 
       {/* Desktop */}
       <div className="hidden md:block">
